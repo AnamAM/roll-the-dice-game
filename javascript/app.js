@@ -1,4 +1,4 @@
-var scores, roundScore, activePlayer, dice;
+var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
@@ -22,43 +22,50 @@ activePlayer = 0;
 
 // callback function called by the event listener 
 document.querySelector('.btn-roll').addEventListener('click', function () {
+    if (gamePlaying) {
 
-    // 1. random number dice roll
-    dice = Math.floor(Math.random() * 6) + 1;
+        // 1. random number dice roll
+        dice = Math.floor(Math.random() * 6) + 1;
 
-    // 2. display the result
-    var dicecDOM = document.querySelector('.dice');
-    dicecDOM.style.display = 'block';
-    dicecDOM.src = './images/dice' + dice + '.png';
+        // 2. display the result
+        var dicecDOM = document.querySelector('.dice');
+        dicecDOM.style.display = 'block';
+        dicecDOM.src = './images/dice' + dice + '.png';
 
-    // 3. update the round score IF the rolled number was NOT a 1 
-    if (dice !== 1) {
-        // add score
-        // equal to roundScore = rouncScore + dice;
-        roundScore += dice;
-        // after player rolls the dice, you want to update the roundScore and then display it in the UI
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        // 3. update the round score IF the rolled number was NOT a 1 
+        if (dice !== 1) {
+            // add score
+            // equal to roundScore = rouncScore + dice;
+            roundScore += dice;
+            // after player rolls the dice, you want to update the roundScore and then display it in the UI
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        }
+        else {
+            // next players turn
+            nextPlayer();
+        }
     }
-    else {
-        // next players turn
-        nextPlayer();
-    }
+
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function () {
-    // add current score to global score
-    scores[activePlayer] += roundScore;
-    // update the UI and dynamically update the scores for the active player 
-    document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
-    // check if player won the game
-    if (scores[activePlayer] >= 10) {
-        document.getElementById("name-" + activePlayer).textContent = 'Winner!';
-        document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-    }
-    else {
-        nextPlayer();
+    if (gamePlaying) {
+
+        // add current score to global score
+        scores[activePlayer] += roundScore;
+        // update the UI and dynamically update the scores for the active player 
+        document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+        // check if player won the game
+        if (scores[activePlayer] >= 10) {
+            document.getElementById("name-" + activePlayer).textContent = 'Winner!';
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+            gamePlaying = false;
+        }
+        else {
+            nextPlayer();
+        }
     }
 });
 
@@ -84,8 +91,9 @@ function init() {
     scores = [0, 0];
     activePlayer = 0;
     roundScore = 0;
+    gamePlaying =
 
-    document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.dice').style.display = 'none';
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
