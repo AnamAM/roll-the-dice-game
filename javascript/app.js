@@ -56,9 +56,15 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     // update the UI and dynamically update the scores for the active player 
     document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
     // check if player won the game
-
-    // next players turn
-    nextPlayer();
+    if (scores[activePlayer] >= 10) {
+        document.getElementById("name-" + activePlayer).textContent = 'Winner!';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+    }
+    else {
+        nextPlayer();
+    }
 });
 
 function nextPlayer() {
@@ -68,6 +74,7 @@ function nextPlayer() {
     document.getElementById('current-0').textContent = '0';
     document.getElementById('current-1').textContent = '0';
 
+    // toggle adds the class if it's not there and removes it if it's already there
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
 
