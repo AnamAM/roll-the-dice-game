@@ -46,7 +46,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
     }
     else {
         // or go to the next player with a ternary statement
-        activePlayer ===  0 ? activePlayer = 1 : activePlayer = 0;
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
         roundScore = 0;
         // if (activePlayer === 0) {
         //     activePlayer = 1;
@@ -56,5 +56,18 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         // }
         document.getElementById('current-0').textContent = '0';
         document.getElementById('current-1').textContent = '0';
+
+        document.querySelector('.player-0-panel').classList.remove('active');
+        document.querySelector('.player-1-panel').classList.add('active');
     }
 });
+
+    document.querySelector('.btn-hold').addEventListener('click', function() {
+        // add current score to global score
+        scores[activePlayer] += roundScore;
+        scores[activePlayer] = scores[activePlayer] + roundScore;
+        // update the UI 
+
+        // check if player won the game
+
+    }); 
