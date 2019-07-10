@@ -1,5 +1,7 @@
 var scores, roundScore, activePlayer, dice;
 
+init();
+
 // use an array to create the scores instead of creating 2 different variables for each of the player's scores
 scores = [0, 0];
 // one roundscore at a time 
@@ -14,16 +16,9 @@ activePlayer = 0;
 // querySelector() lets us select stuff the exact way we do it in css 
 // document.querySelector('#current-' + activePlayer).textContent = dice;
 // document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
-
 // var x = document.querySelector('#score-0').textContent;
 // console.log(x);
 
-document.querySelector('.dice').style.display = 'none';
-
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
 
 // callback function called by the event listener 
 document.querySelector('.btn-roll').addEventListener('click', function () {
@@ -80,3 +75,21 @@ function nextPlayer() {
 
     document.querySelector('.dice').style.display = 'none';
 }
+
+// calling the init function when the 'new game' button is clicked
+document.querySelector('.btn-new').addEventListener('click', init);
+
+// init function to initialize the game
+function init() {
+    scores = [0, 0];
+    activePlayer = 0;
+    roundScore = 0;
+
+    document.querySelector('.dice').style.display = 'none';
+
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+}   
