@@ -1,1 +1,3 @@
 # roll-the-dice-game
+
+### This Roll the Dice game calls for 2 people to play. This game starts off with Player 1 who is able to click the **ROLL DICE** button to roll the dice however many times he or she desires. If Player 1 is satisfied with the amount of points he or she has collected, he or she can click the **HOLD** button to simply hold the current score collected. However, the players are able to roll the dice as many times desired as long as the dice does not land on 1. If this happens, the current score changes to 0 and Player 2 can begin their turn. Whichever player reaches atleast 100 points the fastest wins the game. Players can click **NEW GAME** to restart the game.
